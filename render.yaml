@@ -1,6 +1,7 @@
 services:
   - type: web
     name: mysite
+    plan: free
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn mysite.wsgi:application"
