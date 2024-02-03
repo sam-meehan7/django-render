@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: app
+    name: samsapp
     plan: free
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn app.wsgi:application"
+    startCommand: "gunicorn dogtraining.wsgi:application"
     envVars:
       - key: SECRET_KEY
         generateValue: true
