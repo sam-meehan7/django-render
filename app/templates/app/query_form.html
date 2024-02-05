@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Add necessary meta tags and title -->
+  </head>
+  <body>
+    <h1>DoneDeal Car Reviews</h1>
+
+    <!-- Display a fun fact -->
+    <div id="fun_fact" style="display: none">
+      💡 <i>While you wait, did you know:</i>
+      <p>{{ fun_fact }}</p>
+    </div>
+
+    <!-- Form for user's question -->
+    <form action="" method="post">
+      {% csrf_token %}
+      <label for="question">Please tell us what you are looking for:</label><br />
+      <input type="text" id="question" name="question" value="{{ question }}" required /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <!-- Display the answer and source links if available -->
+    {% if answer %}
+    <div>
+      <h2>Your Question:</h2>
+      <p>{{ question }}</p>
+      <h2>Answer:</h2>
+      <p>{{ answer }}</p>
+    </div>
+    <div>
+      <h2>Source Links:</h2>
+      <div style="display: flex; flex-wrap: wrap">
+        {% for result in vector_results %}
+        <div style="flex: 33%; padding: 5px; text-align: center">
+          <a href="{{ result.metadata.url }}&t={{ result.metadata.start }}s" target="_blank">
+            <img src="{{ result.metadata.thumbnail }}" width="100" />
+            <p>{{ result.metadata.title }}</p>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </body>
+</html>
