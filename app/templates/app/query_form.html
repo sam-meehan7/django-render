@@ -23,12 +23,14 @@
     <!-- Display the answer and source links if available -->
     {% if answer %}
     <div>
-      <h2>Your Question:</h2>
-      <p>{{ question }}</p>
-      <h2>Answer:</h2>
-      <p>{{ answer }}</p>
+      <h2>Recommendations:</h2>
+      {% for section in answer %}
+          <div>
+              <h3>{{ section.make_model }}</h3>
+              <p>{{ section.summary }}</p>
+          </div>
+      {% endfor %}
     </div>
-    <div>
       <h2>Source Links:</h2>
       <div style="display: flex; flex-wrap: wrap">
         {% for result in vector_results %}

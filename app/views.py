@@ -20,11 +20,20 @@ def index(request):
         # Get the question from the form input
         question = request.POST.get('question')
 
-        # Use the answer_question function to process the question
         answer, vector_results = answer_question(question)
 
-        # Update the context with the results
-        context['answer'] = answer
+        # Process the answer into structured data
+        answer_sections = answer.split('\n\n')  # Split the answer by two newlines
+        structured_answer = []
+        for i in range(0, len(answer_sections), 2):
+            if i + 1 < len(answer_sections):
+                structured_answer.append({
+                    'make_model': answer_sections[i].strip(),
+                    'summary': answer_sections[i + 1].strip()
+                })
+
+        # Update the context with the structured answer
+        context['answer'] = structured_answer
         context['question'] = question
         context['vector_results'] = vector_results
 
